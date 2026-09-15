@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Toolshop API — K6 + JMeter reports</title>
+    <style>
+      :root { --navy:#0f2744; --accent:#2f6fed; --bg:#f3f5f8; --card:#fff; --line:#e4e8ee; --muted:#5b6777; }
+      * { box-sizing: border-box; }
+      body { margin: 0; font-family: Segoe UI, system-ui, sans-serif; background: var(--bg); color: #1b2430; }
+      .hero { background: linear-gradient(135deg, var(--navy), #1c4f8f); color: #fff; padding: 32px; }
+      .hero h1 { margin: 0 0 8px; font-size: 28px; }
+      .hero p { margin: 0; opacity: 0.9; }
+      .wrap { max-width: 880px; margin: -16px auto 40px; padding: 0 20px; }
+      .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+      .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; }
+      h2 { margin: 0 0 10px; font-size: 16px; }
+      a { color: var(--accent); text-decoration: none; font-weight: 600; }
+      a:hover { text-decoration: underline; }
+      li { margin: 8px 0; color: #334155; }
+      .note { color: var(--muted); font-size: 13px; margin-top: 16px; }
+      @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <header class="hero">
+      <h1>Toolshop API performance</h1>
+      <p>K6 and JMeter against the same authenticated journey. Open a profile after a run.</p>
+    </header>
+    <div class="wrap">
+      <div class="grid">
+        <section class="card">
+          <h2>K6</h2>
+          <ul>
+            <li><a href="k6/load.html">Load</a> — KPI cards, journey, p95 bars, checks</li>
+            <li><a href="k6/stress.html">Stress</a></li>
+            <li><a href="k6/spike.html">Spike</a></li>
+            <li><a href="k6/fail-demo.html">Fail demo</a> — thresholds expected to fail</li>
+          </ul>
+        </section>
+        <section class="card">
+          <h2>JMeter</h2>
+          <ul>
+            <li><a href="jmeter/load/index.html">Load — official JMeter dashboard</a> (APDEX, graphs). <a href="jmeter/load-thresholds.html">SLA summary</a> is our page, same layout as k6.</li>
+            <li><a href="jmeter/stress/index.html">Stress dashboard</a> · <a href="jmeter/stress-thresholds.html">SLA</a></li>
+            <li><a href="jmeter/spike/index.html">Spike dashboard</a> · <a href="jmeter/spike-thresholds.html">SLA</a></li>
+            <li><a href="jmeter/fail-demo/index.html">Fail demo dashboard</a> · <a href="jmeter/fail-demo-thresholds.html">SLA</a></li>
+          </ul>
+        </section>
+      </div>
+      <p class="note">Each k6 HTML report includes per-endpoint latency, functional checks, and SLA vs actual. JMeter dashboards keep the official charts; the SLA page next to them is the client-facing pass/fail summary.</p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+target/
+.idea/
+*.iml
+.env
+*.log
+.DS_Store
+reports/k6/
+reports/jmeter/
+results/
+*.jtl
+*.jtl.bak
+jmeter.log

@@ -1,0 +1,15 @@
+{
+  "name": "k6-jmeter-performance",
+  "private": true,
+  "description": "K6 and JMeter against the same Toolshop catalog API",
+  "scripts": {
+    "k6:load": "k6 run k6/load.js",
+    "k6:stress": "k6 run k6/stress.js",
+    "k6:spike": "k6 run k6/spike.js",
+    "k6:fail-demo": "k6 run -e FAIL_DEMO=1 -e PROFILE=fail-demo k6/load.js",
+    "jmeter:load": "powershell -File scripts/run-jmeter.ps1 -Profile load",
+    "jmeter:stress": "powershell -File scripts/run-jmeter.ps1 -Profile stress",
+    "jmeter:spike": "powershell -File scripts/run-jmeter.ps1 -Profile spike",
+    "jmeter:fail-demo": "powershell -File scripts/run-jmeter.ps1 -Profile fail-demo"
+  }
+}
