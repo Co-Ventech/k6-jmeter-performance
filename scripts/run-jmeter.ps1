@@ -12,13 +12,13 @@ if ($IsWindows -or $env:OS -eq 'Windows_NT') {
   }
 }
 
-$isWindows = [bool]($IsWindows)
-if (-not $isWindows -and $PSVersionTable.PSVersion.Major -lt 6) {
-  $isWindows = $env:OS -eq 'Windows_NT'
+$runningOnWindows = [bool]$IsWindows
+if (-not $runningOnWindows -and $PSVersionTable.PSVersion.Major -lt 6) {
+  $runningOnWindows = $env:OS -eq 'Windows_NT'
 }
-$jmeterCmd = if ($isWindows) { 'jmeter.bat' } else { 'jmeter' }
+$jmeterCmd = if ($runningOnWindows) { 'jmeter.bat' } else { 'jmeter' }
 $jmeter = Get-Command $jmeterCmd -ErrorAction SilentlyContinue
-if (-not $jmeter -and $isWindows) {
+if (-not $jmeter -and $runningOnWindows) {
   $jmeter = Get-Command jmeter -ErrorAction SilentlyContinue
 }
 $jmeterBat = $null

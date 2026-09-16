@@ -27,6 +27,9 @@ jobs:
           echo "JMETER_HOME=/opt/apache-jmeter-5.6.3" >> "$GITHUB_ENV"
           echo "/opt/apache-jmeter-5.6.3/bin" >> "$GITHUB_PATH"
 
+      - name: Prepare report directories
+        run: mkdir -p reports/k6 reports/jmeter
+
       - name: Run k6 load
         run: k6 run -e VUS=2 -e DURATION=20s k6/load.js
 
