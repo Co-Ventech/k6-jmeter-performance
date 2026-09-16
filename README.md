@@ -57,6 +57,10 @@ start reports\index.html
 
 Use `stress`, `spike`, or `fail-demo` in the path for those profiles. If a JMeter page looks like k6, you opened the SLA file, not the dashboard.
 
+## CI
+
+GitHub Actions runs a light k6 load (`2` VUs, `20s`) and the same JMeter load profile, then uploads `reports/` as the `performance-reports` artifact.
+
 ## Layout
 
 ```

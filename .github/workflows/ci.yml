@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+
+jobs:
+  performance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Install k6
+        uses: grafana/setup-k6-action@v1
+
+      - name: Install JMeter
+        run: |
+          curl -fsSL https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.6.3.tgz -o /tmp/jmeter.tgz
+          sudo tar -xzf /tmp/jmeter.tgz -C /opt
+          echo "JMETER_HOME=/opt/apache-jmeter-5.6.3" >> "$GITHUB_ENV"
+          echo "/opt/apache-jmeter-5.6.3/bin" >> "$GITHUB_PATH"
+
+      - name: Run k6 load
+        run: k6 run -e VUS=2 -e DURATION=20s k6/load.js
+
+      - name: Run JMeter load
+        run: pwsh -File scripts/run-jmeter.ps1 -Profile load
+        env:
+          JMETER_USERS: 2
+          JMETER_RAMPUP: 5
+          JMETER_DURATION: 20
+
+      - name: Upload performance reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: performance-reports
+          path: |
+            reports/
+          if-no-files-found: ignore
